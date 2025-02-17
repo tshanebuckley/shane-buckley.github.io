@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Docusaurus CSS: https://gist.github.com/abhigyantrips/b828ca46b2460c6699c73e0162f6be80#file-docusaurus-css-variables-css */
+
+@layer base {
+  :root {
+
+    --resume-text-size: 1.5em;
+
+    /* Docusaurus colors */
+    --prism-background-color: #edefff;
+    --foreground-color: var(--ifm-color-primary);
+    --background-color: #f6f6f6;
+    --primary-text-color: #0a0a0a;
+    --secondary-text-color: #ffffff;
+    --docusaurus-highlighted-code-line-bg: #0000001a;
+    --menu-link-active: rgba(0, 0, 0, 0.1);
+    --docs-fg-base: #030712;
+    --navbar-color: var(--input);
+
+    /* Docsearch colors */
+    --table-of-contents-color: #e8e8e8;
+    --docsearch-muted-color: #969faf;
+    --docsearch-key-gradient: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
+    --docsearch-key-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff,
+      0 1px 2px 1px #1e235a66;
+
+    /* ifm colors */
+    --ifm-color-primary: #2e8037;
+    --ifm-background-color: var(--background-color);
+    --ifm-background-surface-color: var(--background-color);
+    --ifm-footer-background-color: var(--input);
+    --ifm-footer-link-color: #333;
+    --ifm-menu-color-active: var(--docs-fg-base);
+    --ifm-menu-color-background-active: #ffffffe7;
+     
+    /* ifm primary color calculations */
+    --ifm-color-primary-dark: color-mix(in srgb, var(--ifm-color-primary), black 10%);
+    --ifm-color-primary-darker: color-mix(in srgb, var(--ifm-color-primary), black 15%);
+    --ifm-color-primary-darkest: color-mix(in srgb, var(--ifm-color-primary), black 30%);
+    --ifm-color-primary-light: color-mix(in srgb, var(--ifm-color-primary), white 10%);
+    --ifm-color-primary-lighter: color-mix(in srgb, var(--ifm-color-primary), white 15%);
+    --ifm-color-primary-lightest: color-mix(in srgb, var(--ifm-color-primary), white 30%);
+    
+    /* other ifm variables */
+    --ifm-code-font-size: 95%;
+    --ifm-h1-font-size: 2.5rem;
+    --ifm-font-family-base: Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, system-ui,
+      -apple-system, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --ifm-menu-link-padding-vertical: 0.5rem;
+    --ifm-global-shadow-tl: 2px 3px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+    /* Shadcn Style */
+    --background: var(--background-color);
+    --foreground: var(--foreground-color);
+    --card: var(--background);
+    --card-foreground: var(--foreground-color);
+    --popover: var(--background);
+    --popover-foreground: var(--foreground-color);
+    --primary: var(--ifm-color-primary);
+    --primary-foreground: var(--ifm-color-primary-light);
+    --secondary: var(--ifm-color-primary-lighter);
+    --secondary-foreground: var(--ifm-color-primary);
+    --muted: var(--ifm-color-primary-lighter);
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: var(--ifm-color-primary-lighter);
+    --accent-foreground: var(--ifm-color-primary);
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--ifm-color-primary-light);
+    --border: var(--ifm-color-primary-lightest);
+    --input: var(--ifm-color-primary-lightest);
+    --ring: var(--foreground-color);
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+
+  html[data-theme='dark'] {
+
+    /* Docusaurus color */
+    --prism-background-color: #1d2144;
+    --foreground-color: var(--ifm-color-primary);
+    --background-color: #14102c;
+    --primary-text-color: #f6f6f6;
+    --secondary-text-color: #0a0a0a;
+    --docusaurus-highlighted-code-line-bg: #0000004d;
+    --menu-link-active: rgba(255, 255, 255, 0.1);
+    --navbar-color: var(--input);
+    
+    /* Docsearch colors */
+    --table-of-contents-color: #e8e8e8;
+    --docsearch-muted-color: #7f8497;
+    --docsearch-key-gradient: linear-gradient(-26.5deg, #565872, #31355b);
+    --docsearch-key-shadow: inset 0 -2px 0 0 #282d55, inset 0 0 1px 1px #51577d,
+      0 2px 2px 0 #0304094d;
+
+    /* ifm colors */
+    --ifm-color-primary: #225f3e;
+    --ifm-background-color: var(--background-color);
+    --ifm-background-surface-color: var(--background-color);
+    --ifm-footer-background-color: var(--input);
+    --ifm-footer-link-color: #dadde1;
+    --ifm-menu-color-active: var(--ifm-color-primary);
+    --ifm-menu-color-background-active: #ffffff1a;
+
+    /* Shadcn Style */
+    --background: var(--background-color);
+    --foreground: var(--foreground-color);
+    --card: var(--background-color);
+    --card-foreground: var(--foreground-color);
+    --popover: var(--background-color);
+    --popover-foreground: var(--foreground-color);
+    --primary: var(--foreground-color);
+    --primary-foreground: var(--ifm-color-primary-dark);
+    --secondary: var(--ifm-color-primary-darker);
+    --secondary-foreground: var(--foreground-color);
+    --muted: var(--ifm-color-primary-darker);
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: var(--ifm-color-primary-darker);
+    --accent-foreground: var(--foreground-color);
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: var(--foreground-color);
+    --border: var(--ifm-color-primary-darker);
+    --input: var(--ifm-color-primary-darker);
+    --ring: var(--ifm-color-primary-darkerest);
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  .poke-background {
+    background-color: var(--background-color);
+    transition: background-color 0.25s ease-in-out;
+    margin: 8px;
+  }
+
+  .poke-container {
+      display: flex;
+      justify-content: center;
+      background-color: var(--background-color);
+      transition: background-color 0.25s ease-in-out;
+  }
+
+  .poke-title {
+      text-align: center;
+      color: var(--primary-text-color);
+      margin-bottom: 50px;
+      transition: color 0.25s ease-in-out;
+  }
+
+  .poke-text {
+      font-size: 8px;
+      word-spacing: 0.5em;
+      font-family: "Pokemon GB", Arial, sans-serif;
+      color: var(--primary-text-color);
+      transition: color 0.25s ease-in-out;
+  }
+
+  .text {
+      color: var(--primary-text-color);
+      text-align: center;
+      margin-bottom: 0px;
+      transition: color 0.25s ease-in-out;
+  }
+
+  a {
+    @apply hover:no-underline;
+  }
+
+  .blog-tags b {
+    @apply hidden;
+  }
+}
+
+/* Custom CSS that should always be included */
+.navbar__item svg,
+.menu__link svg,
+.footer__link-item svg {
+  display: none;
+}
+
+.navbar {
+  background-color: var(--navbar-color);
+}
+
+.main-wrapper,
+.container {
+  background-color: var(--background);
+}
+
+footer {
+  div.container {
+    background-color: var(--ifm-footer-background-color);
+  }
+}
+
+.div,
+.text-xs,
+.text-sm,
+.test-base,
+.text-lg,
+.text-xl,
+.text-2xl,
+.text-3xl,
+.text-4xl,
+.text-5xl,
+.text-6xl,
+.text-7xl,
+.text-8xl,
+.text-9xl {
+  transition: background-color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+.header-github-link::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background-color: var(--ifm-navbar-link-color);
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E");
+  transition: background-color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+.header-github-link:hover::before {
+  background-color: var(--ifm-navbar-link-hover-color);
+}
+
+/*  Keyboard search keys */
+kbd {
+  &[class^='searchHint_'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--docsearch-key-gradient);
+    border: 0;
+    border-radius: 3px;
+    box-shadow: var(--docsearch-key-shadow);
+    color: var(--docsearch-muted-color);
+    height: 20px;
+    margin-right: 0.4em;
+    padding: 0 7px 2px;
+  }
+
+  &.searchHint_btn {
+    display: inline-block;
+    align-items: unset;
+    justify-content: unset;
+    height: unset;
+    margin-left: 0.4rem;
+    padding: 4px 10px;
+  }
+}
+
+/* Search navbar (local search) */
+.navbar__search-input {
+  padding: 0 2rem 0 2.25rem;
+  width: 13.5rem;
+}
+
+/* Nav bar padding */
+.navbar__inner {
+  padding: 0 20rem 0 20rem;
+}
+
+@media screen and (max-width: 1991px) {
+  /* Search navbar local */
+  .navbar__search-input {
+    width: 14rem;
+    padding: 0 10rem 0 10rem;
+  }
+
+  .navbar__inner {
+    padding: 0 0rem 0 0rem;
+  }
+
+}
+
+/* Tablet */
+@media screen and (max-width: 991px) {
+  /* Search navbar local */
+  .navbar__search-input {
+    width: 14rem;
+    padding: 0 0.5rem 0 2.25rem;
+  }
+
+  .navbar__inner {
+    padding: 0 0rem 0 0rem;
+  }
+
+}
+
+/* Mobile */
+@media screen and (max-width: 575px) {
+  /* Search navbar local */
+  .navbar__search-input {
+    &:not(:focus) {
+      width: 6rem !important;
+    }
+  }
+
+  .navbar__inner {
+    padding: 0 0rem 0 0rem;
+  }
+
+}

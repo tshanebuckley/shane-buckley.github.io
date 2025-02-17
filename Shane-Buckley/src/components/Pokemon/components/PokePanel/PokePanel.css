@@ -1,0 +1,18 @@
+.poke-panel {
+  margin: 8px;
+  border-radius: 2px;
+  padding: 8px;
+  height: fit-content;
+  line-height: 16px;
+  margin: auto;
+  overflow: auto;
+  background: var(--background-color);
+  border: 1px solid var(--background-color);
+  box-shadow: 0 1px 0 1px var(--primary-text-color),
+              inset 0 1px 0 1px var(--primary-text-color),
+              0 0 0 1px var(--primary-text-color),
+              inset 0 0 0 1px var(--primary-text-color);
+  transition: background 0.25s ease-in-out;
+  transition: border 0.25s ease-in-out;
+  transition: box-shadow 0.25s ease-in-out;
+}

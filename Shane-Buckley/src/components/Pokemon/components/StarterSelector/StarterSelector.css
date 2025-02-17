@@ -1,0 +1,18 @@
+.starter-list {
+    align-content: center;
+    display: inline-block;
+    list-style-type: none;
+}
+
+.starter-group-item {
+    display: inline-flex;
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    transition: background-color 0.25s ease-in-out;
+}
+
+.active {
+    background-color: var(--foreground-color);
+}
