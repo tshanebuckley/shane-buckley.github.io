@@ -8,7 +8,13 @@ import {
   NotebookIcon
 } from 'lucide-react';
 
-import NGSImageUrl from '@site/static/img/ngs.jpg';
+function getImg(path) {
+  let retVal = require('@site/static' + path).default;
+  if (retVal) {
+    return retVal;
+  }
+  return path;
+}
 
 const events = [
   {
@@ -23,37 +29,37 @@ const events = [
     cards: [
       {
         title: "NGS Data Analysis",
-        image: NGSImageUrl,
+        image: getImg('/img/ngs.jpg'),
         description: "I've been working through this textbook to gain more experience in Bioinformatics."
       },
       {
         title: "React",
-        image: require('@site/static/img/react.png').default,
+        image: getImg('/img/react.png'),
         description: "Decided to learn more about front-end development, so I chose React for the ecosystem and popularity."
       },
       {
         title: "Typescript/Javascript",
-        image: require('@site/static/img/ts-and-js.png').default,
+        image: getImg('/img/ts-and-js.png'),
         description: "As part of building this site and learning React, I gained some experience using Typescript and Javascript."
       },
       {
         title: "Tailwind",
-        image: require('@site/static/img/tailwind.jpg').default,
+        image: getImg('/img/tailwind.jpg'),
         description: "Tailwind seems very popular for styling website with CSS, so I included this as well."
       },
       {
         title: "Docusaurus",
-        image: require('@site/static/img/docusaurus.png').default,
+        image: getImg('/img/docusaurus.png'),
         description: "This entire site is generated using Docusaurus as I wanted to include tutorial/blog sections."
       },
       {
         title: "Rust",
-        image: require('@site/static/img/ferris.png').default,
+        image: getImg('/img/ferris.png'),
         description: "A few months ago, I completed rustlings and am spending this time getting more comfortable with the language."
       },
       {
         title: "Web Assembly",
-        image: require('@site/static/img/wasi.png').default,
+        image: getImg('/img/wasi.png'),
         description: "While a cool feature for web development, I am mostly interested in wasi and the component model."
       },
     ]
@@ -71,37 +77,37 @@ const events = [
     cards: [
       {
         title: "C#/.NET",
-        image: require('@site/static/img/csharp.png').default,
+        image: getImg('/img/csharp.png'),
         description: "C# was the language we used to develop these applications and I've become very proficient with the language in 3 years of using it."
       },
       {
         title: "Entity Framework",
-        image: require('@site/static/img/efcore.png').default,
+        image: getImg('/img/efcore.png'),
         description: "I integrated EF into our application to allow database migrations to be seamless and to manage our schema as C# code."
       },
       {
         title: "Dapper",
-        image: require('@site/static/img/dapper.png').default,
+        image: getImg('/img/dapper.png'),
         description: "I used Dapper as the foundation for creating a basic SQL query builder to reduce the amount of raw SQL we had to write."
       },
       {
         title: "SQL",
-        image: require('@site/static/img/sql.png').default,
+        image: getImg('/img/sql.png'),
         description: "While I primarily used MS Access here, I am also familiar with SQLite, MS SQL Server, and Postgres."
       },
       {
         title: "ML.NET",
-        image: require('@site/static/img/mlnet.png').default,
+        image: getImg('/img/mlnet.png'),
         description: "I used ML.NET's implementation of the Apache Arrow spec to recreate much of the dplyr R package in C#. This gave us a convenient API for working with time series data."
       },
       {
         title: "Domain-Driven Design",
-        image: require('@site/static/img/ddd.jpg').default,
+        image: getImg('/img/ddd.jpg'),
         description: "I read the Eric Evans book on the subject and implemented the foundations of DDD in our product."
       },
       {
         title: "Design Patterns",
-        image: require('@site/static/img/design_patterns.jpg').default,
+        image: getImg('/img/design_patterns.jpg'),
         description: "I gained experience implemeneting varies design patterns such as factories, builders, repositories, proxies, etc."
       },
     ]
@@ -119,57 +125,57 @@ const events = [
     cards: [
       {
         title: "Slurm",
-        image: require('@site/static/img/slurm-logo.png').default,
+        image: getImg('/img/slurm-logo.png'),
         description: "I used Slurm to execute data preprocessong pipelines in parallel across participant fMRI data."
       },
       {
         title: "Docker",
-        image: require('@site/static/img/docker.png').default,
+        image: getImg('/img/docker.png'),
         description: "I used docker to create custom images to be run on the HPC cluster."
       },
       {
         title: "Apptainer",
-        image: require('@site/static/img/apptainer.png').default,
+        image: getImg('/img/apptainer.png'),
         description: "I used docker images to create apptainer containers, as apptainer is designed for use in HPC systems."
       },
       {
         title: "Python",
-        image: require('@site/static/img/python.png').default,
+        image: getImg('/img/python.png'),
         description: "I used python for general data management tasks and cli development."
       },
       {
         title: "R",
-        image: require('@site/static/img/R_logo.png').default,
+        image: getImg('/img/R_logo.png'),
         description: "I used R, mainly through the dplyr package, to clean and organize research data."
       },
       {
         title: "Bash",
-        image: require('@site/static/img/bash.png').default,
+        image: getImg('/img/bash.png'),
         description: "Bash is essentially a pre-requisite for working in any UNIX environment."
       },
       {
         title: "Conda",
-        image: require('@site/static/img/anaconda.png').default,
+        image: getImg('/img/anaconda.png'),
         description: "I used conda to create virtual environments that I could share across my local machine and the HPC cluster."
       },
       {
         title: "XNAT",
-        image: require('@site/static/img/xnat.png').default,
+        image: getImg('/img/xnat.png'),
         description: "XNAT was the imaging database that I had to fetch our data from. I created scripts to automate this ingress of data."
       },
       {
         title: "REDCap",
-        image: require('@site/static/img/redcap.jpg').default,
+        image: getImg('/img/redcap.jpg'),
         description: "REDCap is how we stored our clinical data. I had to get familiar with REDCap to help create QC checks to align fMRI data with clinical data."
       },
       {
         title: "fMRIPrep",
-        image: require('@site/static/img/nipreps_brain.png').default,
+        image: getImg('/img/nipreps_brain.png'),
         description: "Is a standardized fMRI preprocessing tool that it was my responsibility to learn and implement for the lab on the HPC."
       },
       {
         title: "BIDS",
-        image: require('@site/static/img/bids.png').default,
+        image: getImg('/img/bids.png'),
         description: "Is a standard for organizing neuroimaging data that I had to extend for our data sets and convert our data to for use with fMRIPrep."
       },
     ]
@@ -187,17 +193,17 @@ const events = [
     cards: [
       {
         title: "Oakland Primanti's",
-        image: require('@site/static/img/oakland_pbros.jpg').default,
+        image: getImg('/img/oakland_pbros.jpg'),
         description: "It was pretty fun getting to work at the Oakland location on Pitt's campus."
       },
       {
         title: "ServSafe",
-        image: require('@site/static/img/servsafe.jpg').default,
+        image: getImg('/img/servsafe.jpg'),
         description: "While working here, I had to keep a ServSafe certification."
       },
       {
         title: '"Almost Famous"',
-        image: require('@site/static/img/pbros_sandwhich.jpg').default,
+        image: getImg('/img/pbros_sandwhich.jpg'),
         description: "Primanti's is well known for their piled high sandwhiches including fries and coleslaw in the sandwhich rather than on the side."
       },
     ]
@@ -215,27 +221,27 @@ const events = [
     cards: [
       {
         title: "Machine Learning",
-        image: require('@site/static/img/ml.jpg').default,
+        image: getImg('/img/ml.jpg'),
         description: "I took a machine learning course. Here, I learned the basic concepts like supervised vs unsupervised learning and parametric vs non-parametric models."
       },
       {
         title: "MATLAB",
-        image: require('@site/static/img/matlab.png').default,
+        image: getImg('/img/matlab.png'),
         description: "As part of my machine learning class, I was introduced to MATLAB programming."
       },
       {
         title: "Genetics",
-        image: require('@site/static/img/genetics.jpg').default,
+        image: getImg('/img/genetics.jpg'),
         description: "As a bioniformatics major, I had to learn about biology and chemistry along with taking a class on genetics."
       },
       {
         title: "Test-Driven Development",
-        image: require('@site/static/img/tdd.png').default,
+        image: getImg('/img/tdd.png'),
         description: "I took a class on software testing where one of the main topics we covered was TDD using the Ruby language."
       },
       {
         title: "Protein Data Bank",
-        image: require('@site/static/img/pdb.png').default,
+        image: getImg('/img/pdb.png'),
         description: "I did some work pulling and querying data from the PDB."
       },
     ]
@@ -254,7 +260,7 @@ const events = [
     cards: [
       {
         title: "Great Lakes",
-        image: require('@site/static/img/great_lakes.jpg').default,
+        image: getImg('/img/great_lakes.jpg'),
         description: 'I got to experience most of bootcamp minus the last few modules and graduation. After talking it over with my family, I returned home to finish college.'
       },
     ]
@@ -272,17 +278,17 @@ const events = [
     cards: [
       {
         title: "Java",
-        image: require('@site/static/img/java.png').default,
+        image: getImg('/img/java.png'),
         description: "This was the language I used in my introduction to programming course."
       },
       {
         title: "C++",
-        image: require('@site/static/img/cpp.png').default,
+        image: getImg('/img/cpp.png'),
         description: "I used for two semesters of data structures and algorithms courses."
       },
       {
         title: "Octave",
-        image: require('@site/static/img/octave.png').default,
+        image: getImg('/img/octave.png'),
         description: "I was introduces to octave as a free alternative to MATLAB in my chemistry classes."
       },
     ]
