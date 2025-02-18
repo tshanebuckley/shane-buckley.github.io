@@ -8,6 +8,8 @@ import {
   NotebookIcon
 } from 'lucide-react';
 
+import NGSImageUrl from '@site/static/img/ngs.jpg';
+
 const events = [
   {
     startDate: "January 2025",
@@ -21,7 +23,7 @@ const events = [
     cards: [
       {
         title: "NGS Data Analysis",
-        image: require('@site/static/img/ngs.jpg').default,
+        image: NGSImageUrl,
         description: "I've been working through this textbook to gain more experience in Bioinformatics."
       },
       {
