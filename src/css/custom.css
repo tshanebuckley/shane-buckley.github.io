@@ -35,6 +35,7 @@
     --ifm-footer-link-color: #333;
     --ifm-menu-color-active: var(--docs-fg-base);
     --ifm-menu-color-background-active: #ffffffe7;
+    --ifm-navbar-link-hover-color: var(--ifm-background-color);
      
     /* ifm primary color calculations */
     --ifm-color-primary-dark: color-mix(in srgb, var(--ifm-color-primary), black 10%);
@@ -52,6 +53,7 @@
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --ifm-menu-link-padding-vertical: 0.5rem;
     --ifm-global-shadow-tl: 2px 3px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
 
     /* Shadcn Style */
     --background: var(--background-color);
@@ -79,6 +81,58 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    /* markdown style and color */
+    .markdown {
+      a:link {
+        color: var(--ifm-color-primary-light);
+        border-radius: 25px;
+        background-color: var(--primary-text-color);
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+      a:hover {
+        color: var(--ifm-color-primary-lightest);
+        text-decoration: underline;
+      }
+      a:visited {
+        color: var(--ifm-color-primary-light);
+      }
+    }
+
+    /* navigation styles and colors */
+    .navbar__link--active {
+      color: var(--ifm-color-primary-darkest);
+    }
+
+    .navbar__link:hover {
+      color: var(--ifm-color-primary-darkest);
+    }
+
+    .footer__link-item:hover {
+      color: var(--ifm-color-primary-darkest);
+    }
+
+    .navbar__title:hover {
+      color: var(--ifm-color-primary-darkest);
+    }
+
+    .navbar__search-input {
+      fill: var(--primary-text-color);
+      background-color: var(--ifm-background-color);
+    }
+
+    .navbar__search-input.icon {
+      fill: var(--primary-text-color);
+    }
+
+    .table-of-contents__link:hover {
+      color: var(--ifm-color-primary-lightest)
+    }
+    /* toc-highlight */
+
   }
 
   html[data-theme='dark'] {
@@ -109,6 +163,8 @@
     --ifm-menu-color-active: var(--ifm-color-primary);
     --ifm-menu-color-background-active: #ffffff1a;
 
+    --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
+
     /* Shadcn Style */
     --background: var(--background-color);
     --foreground: var(--foreground-color);
@@ -134,6 +190,65 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* markdown style and color */
+    .markdown {
+      a:link {
+        color: var(--primary-text-color);
+        border-radius: 25px;
+        background-color: var(--input);
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+      a:hover {
+        color: var(--ifm-background-color);
+        text-decoration: underline;
+      }
+      a:visited {
+        color: var(--ifm-background-color);
+      }
+    }
+
+    /* navigation styles and colors */
+    .navbar__link--active {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    .navbar__link:hover {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    .footer__link-item:hover {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    .navbar__title:hover {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    .table-of-contents__link--active {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    .table-of-contents__link:hover {
+      color: var(--ifm-color-primary-lighter);
+    }
+
+    .menu__link--active {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    .breadcrumbs__item--active .breadcrumbs__link {
+      color: var(--ifm-color-primary-lightest);
+    }
+
+    /* dark toggle style */
+    .toggleButton_gllP:hover {
+      background-color: var(--background-color);
+    }
+
   }
 
   .poke-background {
@@ -178,6 +293,34 @@
   .blog-tags b {
     @apply hidden;
   }
+}
+
+/* Custom CSS to fix markdown defaults */
+.markdown {
+
+  h1 { font-size: 250%; }
+  h2 { font-size: 225%; }
+  h3 { font-size: 200%; }
+  h4 { font-size: 175%; }
+  h5 { font-size: 150%; }
+  h6 { font-size: 125%; }
+
+  ol li {
+    display: list-item;
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+
+  ul li {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  p, ul, ol, li {
+    font-size: large;
+  }
+
 }
 
 /* Custom CSS that should always be included */
