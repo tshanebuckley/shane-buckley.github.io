@@ -93,12 +93,12 @@
         padding-top: 2px;
         padding-bottom: 2px;
       }
+      a:visited {
+        color: var(--secondary-text-color);
+      }
       a:hover {
         color: var(--ifm-color-primary-lightest);
         text-decoration: underline;
-      }
-      a:visited {
-        color: var(--ifm-color-primary-light);
       }
     }
 
@@ -131,7 +131,6 @@
     .table-of-contents__link:hover {
       color: var(--ifm-color-primary-lightest)
     }
-    /* toc-highlight */
 
   }
 
@@ -202,12 +201,12 @@
         padding-top: 2px;
         padding-bottom: 2px;
       }
+      a:visited {
+        color: var(--secondary-text-color);
+      }
       a:hover {
         color: var(--ifm-background-color);
         text-decoration: underline;
-      }
-      a:visited {
-        color: var(--ifm-background-color);
       }
     }
 
