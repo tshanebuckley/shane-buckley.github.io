@@ -1,0 +1,253 @@
+---
+sidebar_position: 3
+---
+
+# Virtual Environments/Package Managers
+
+**Package Manager**: a software tool that automates the process of installing, updating, configuring, and removing computer programs on a system.
+
+**Virtual Environment**: a computer-generated space that allows users to interact with a simulated environment.
+
+With the goal of reproducibility, package managers exist to lower the burden of finding and installing software dependencies. [Nix](https://nixos.org/) is one of the largest examples of a package manager, though language specific ones also exits like Python's [PyPI](https://pypi.org/), R's [CRAN](https://cran.r-project.org/), and Rust's [crates](https://crates.io/).
+
+While package managers simplify adding, removing, and updating packages, many of them also assist in revolving package version conflicts. These dependency conflicts may lead to a desire to have multiple environments designed for executing certain tasks or running certain software. Therefore, virtualizing environments allows us to have multiple different environments available on the same machine. These environments typically track themselves as a schema/config/manifest file of dependencies installed from a package managers. This also adds to the reproducibility aspect of virtual environments.
+
+In many cases, these virtual environments may be shared by their manifest and re-used. A common use case is to use these package managers and virtual environments to create containers as it reduces the amount of code that must be used to install the dependencies in the container definition (typically a Dockerfile).
+
+We will focus on creating virtual environments using:
+
+- [conda](https://docs.conda.io/projects/conda/en/stable/user-guide/index.html) for its widespread adoption among the data science and scientific communities.
+- [flox](https://flox.dev/docs/install-flox/) a newer, but powerful virtual environment tool powered by Nix.
+
+We will focus on these basics across these virtual environment platforms:
+
+- install the package manager
+- creating a new environment
+- activating an environment
+- finding packages to install
+- installing a package
+- uninstalling a package
+- exporting the environment
+- importing the environment
+
+:::note
+We provide `ngs_intro/venvs/conda` and `ngs_intro/venvs/flox` for you to learn the basics without polluting your user environment. If you have installed flox and activated the environment provided with this repository, you can skip installing flox or conda in the below examples.
+:::
+
+## Conda
+
+We recommend you `cd ./ngs_intro/venvs/conda` to run the following commands in a clean environment that will not be persisted in git.
+
+### Install Conda
+
+Follow the installation instructions [here](https://docs.anaconda.com/miniconda/install/) for your operating system.
+
+### Creating a new Conda Environment
+
+Create a new env named `test`:
+
+```bash
+conda create --name test
+```
+
+### Activating a Conda Environment
+
+We can activate our `test` environment with the following command:
+
+```bash
+# create the environment
+conda activate test
+# list the environments to see our new 'test' env
+conda env list
+```
+
+### Searching for packages with Conda
+
+The conda cli has a search method, but I would recommend searching for packages [here](https://anaconda.org/).
+
+### Installing a Conda Package
+
+We will install the `cowpy` conda package and run it from the cli:
+
+```bash
+# install 'cowpy'
+conda install cowpy
+# run the command to say hello world
+cowpy -r "Hello, World!"
+```
+
+### Exporting a Conda Environment
+
+```bash
+conda env export --from-history > environment.yml
+```
+
+### Deactivating the Conda Environment
+
+```bash
+conda deactivate
+```
+
+### Deleting a Conda Environment
+
+```bash
+# remove the 'test' environment
+conda env remove -n test
+# list the environments to see our 'test' env no longer exists
+conda env list
+```
+
+### Importing a Conda Environment
+
+```bash
+# this will re-create out 'test' environment from the yaml file
+conda env create -f environment.yml
+# list the environments to see our re-created 'test' env
+conda env list
+```
+
+### Uninstalling a Conda Package
+
+```bash
+# re-activate our re-created 'test' env
+conda activate test
+# view our listed dependencies
+conda list
+# uninstall 'cowpy'
+conda uninstall cowpy
+# see that our packages have been uninstalled
+# view our listed dependencies
+conda list
+```
+
+---
+
+At this point, our small conda tutorial is complete and we have:
+
+1. Created a conda environment named 'test'
+1. Installed the 'cowpy' package
+1. Saved the environment state in an 'environment.yml' file.
+1. Deleted the environment.
+1. Re-createad the environment from the 'environment.yml' file.
+1. Uninstalled the 'cowpy' package,
+
+From here you can deactivate the test environment and move on to another section of this repository.
+
+## Flox
+
+We recommend you `cd ./ngs_intro/venvs/flox` to run the following commands in a clean environment that will not be persisted in git.
+
+### Install Flox
+
+Follow the installation instructions [here](https://flox.dev/docs/install-flox/) for your operating system.
+
+If you are currently in a flox environment, it is recommended you exit this environment and navigate the the directory mentioned above before continuing.
+
+```bash
+# to exit a flox env
+exit
+```
+
+### Creating a new Flox Environment
+
+```bash
+flox init
+```
+
+### Activating a Flox Environment
+
+```bash
+flox activate
+```
+
+### Searching for a Nix Package with Flox
+
+```bash
+flox search cowsay
+```
+
+### Installing a Flox Package
+
+```bash
+# install 'cowsay'
+flox i cowsay
+# run it to show that it is working
+cowsay "Hello, World!"
+```
+
+You will probably get some perl warnings when running cowsay. To fix this, open the `./.flox/env/manifest.toml` file and add the following `vars` section:
+
+> [!TIP]
+> You can make this edit through your terminal's default editor with `flox edit`, which will add the benefit of validating your flox config after editing.
+
+```diff
+...
+# Set environment variables in the `[vars]` section. These variables may not
+# reference one another, and are added to the environment without first
+# expanding them. They are available for use in the `[profile]` and `[hook]`
+# scripts.
+[vars]
+# message = "Howdy"
++ LC_ALL = "C"
+...
+```
+
+Now, if you exit and re-activate the environment, these warnings should go away.
+
+```bash
+# deactivate
+exit
+# re-activate
+flox activate
+# run 'cowsay'
+cowsay "Hello, World!"
+```
+
+### Exporting a Flox Environment
+
+Unlike with conda, where we export and import from a yaml file, flox expects the entire `.flox` folder to be copied. The flox environment is presumed to normally be [shared as git repositories or container](https://flox.dev/docs/tutorials/sharing-environments/), but we will do an example on our local file system for a simple demonstration.
+
+```bash
+# make a new directory for the copied env to live
+mkdir copy
+# make a new '.flox' dir
+mkdir copy/.flox
+# copy the env over
+cp -r .flox/* ./copy/.flox
+# exit your current flox env
+exit
+# enter your copied flox directory
+cd copy
+flox activate
+# run 'cowsay' to show that this new env works
+cowsay "Hello, World!"
+```
+
+You now have flox environment under `ngs_intro/venvs/flox/copy` that is a copy of the environment located under `ngs_intro/venvs/flox`.
+
+### Uninstalling a Flox Package
+
+```bash
+# uninstall 'cowsay'
+flox remove cowsay
+# attempt to run 'cowsay' to show it is uninstalled
+cowsay "Hello, World!"
+```
+
+### Deleting a Flox Environment
+
+```bash
+# exit the environment
+exit
+# delete the environment
+flox delete
+# note the the '.flox' folder is gone
+ls -a
+```
+:::note
+You could also just manually delete the `.flox` folder.
+:::
+
+## Flox and Conda together
+
+Flox and conda can both be installed for Linux and Mac. If you look into the `ngs_intro/.flox/env/manifest.toml` under the `[hook].on-activate` section, you will find a bash script that integrates using conda within a flox environment. This gives us the power to create reusable environments that leverage both tools.

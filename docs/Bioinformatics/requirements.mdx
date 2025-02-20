@@ -1,0 +1,79 @@
+---
+sidebar_position: 1
+---
+
+# Requirements
+
+You must be on a Unix-based OS (tested with Ubuntu), and have [flox](https://flox.dev/docs/install-flox/) and [git](https://git-scm.com/) installed.
+
+For Windows users: it is recommended to use the Windows Subsystem for Linux, AKA: [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+For Mac users: If you have a Mac with an Intel processor, this should work as is, but is untested.
+
+:::warning
+Running on Mac is untested and does not include Apptainer because it is unavailable for Darwin for flox.
+:::
+
+If you are familiar with [conda](https://docs.conda.io/projects/conda/en/stable/user-guide/index.html), flox is a similar tool. In short, flox is like conda
+for Linux environments, supporting more than just Python, R, and traditional scientific utilities.
+
+You should not need to install conda. Flox allows for custom environment configuration through bash scripting. The flox environments that require conda will install it on the first activation.
+
+## Start the Environment
+
+1. Clone the Repository with git
+
+```bash
+# clone
+git clone https://github.com/tshanebuckley/ngs_intro.git
+# enter the directory
+cd ngs_intro
+```
+
+2. Start the Environment
+
+```bash
+flox activate
+```
+
+That's pretty much it, you clone the repo and get going!
+
+## Repository Structure
+
+Under the `.flox` folder, you will find the basic flox environment. As you use this environment and after the initial activation,
+you will notice that the `.flox/lib` directory will include a directory with the same name as your user profile. This folder is created and used as your `$HOME` directory to keep this completely isolated from your main system. This makes cleaning this up as simple as deleting the cloned repository and helps avoid overriding or overlapping with your system.
+
+Everything else are examples to try running yourself. Have fun!
+
+## Helper Scripts
+
+- Exporting the conda spec file:
+
+```bash
+# file placed in the ngs_intro directory
+export_conda_spec
+```
+
+- Exporting the conda env yaml file:
+
+```bash
+# file placed in the ngs_intro directory
+export_conda_env
+```
+
+- Exporting the conda spec file and env yaml file:
+
+```bash
+# files placed in the ngs_intro directory
+export_conda
+```
+
+- Deleting the completed chapters (so that someone may attempt them from scratch):
+
+```bash
+# TODO
+```
+
+:::note
+These helper scripts are aliases found in the `profile` section of the `.flox/lib/env/manifest.toml` file.
+:::

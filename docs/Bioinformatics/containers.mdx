@@ -1,0 +1,233 @@
+---
+sidebar_position: 2
+---
+
+# Containers
+
+In order to build containers in these environments, you need to install `newuidmap` and `newgidmap` in your actual Linux host environment before entering the flox environment.
+
+This can be done with the following command:
+
+```bash
+sudo apt-get install -y uidmap
+```
+
+:::note
+A rootless docker daemon is set to start on startup. If using docker, start flox with the `-s` flag to start our configured services:
+```bash
+flox activate -s
+```
+:::
+
+Our examples are meant to be run from the `ngs_intro/containers` directory, so navigate there before running any of the below examples. We will mainly focus on 3 examples for each container platform:
+
+1. Simply running an image from a container registry.
+1. Building and running an image locally.
+1. Using our local image to run a cli command in our containerized environment.
+
+:::note
+Using apptainer should mostly be the same as using [singularity](https://docs.sylabs.io/guides/4.2/user-guide/index.html). Singularity is owned by [Sylabs](https://sylabs.io/singularity/) who provide a community edition of singularity (SingularityCE). Apptainer is a fork of singularity maintained by the [Linux Foundation](https://www.linuxfoundation.org/). This repository focuses on apptainer, but the basics still apply to singularity.
+:::
+
+Below, we will cover some basics of each container runtime. We will highlight running, building, and some of the differences between each tool.
+
+## Docker
+
+Docker is the original container runtime. It typically requires a daemon process to be running to function normally, which can make local development difficult. Docker is also not recommended to be installed on local machines in production user environments as it exposes the security concern of elevating to root privileges.
+
+### Running a Docker Image
+
+For a simple example of running a docker container image, run this command:
+
+```bash
+docker run --rm grycap/cowsay
+```
+
+### Building and Running a Docker Image
+
+The `Dockerfile` is the document that describes how the container will be built. We build can build and run it with the following commands:
+
+```bash
+# build the container image
+docker build -t hello-py .
+# check that we have the container image locally
+# under REPOSITORY there should be an image named "hello-py"
+docker images
+# start a container using the hello-py image
+docker run -d -v ./messages:/app/messages -p 8080:80 hello-py
+# get information on your running containers
+docker ps
+```
+
+You should be able to navigate to this url to see the app running: `http://localhost:8080/` where you will see a simple `Hello, World!` message.
+
+:::tip
+The `-d` flag for the `docker run` command runs the container as a daemon process. Many workflows will simply run the container as it does not need to be launched as a service.
+:::
+
+:::tip
+The `-v` flag for the `docker run` command mounts our `./messages` directory in the container's `/app/messages` directory. This allows us to access files on our computer from our container.
+:::
+
+:::tip
+The `-p` flag for the `docker run` command forwards the container's `port 80` to our computer's `port 8080`. This allows us to communicate to the app running in our container from our computer.
+:::
+
+If you navigate to the following endpoints you will see the following messages:
+
+- `http://localhost:8080/messages` -> `No messages are available.`
+- `http://localhost:8080/messages/cat` -> `No message found for "cat".`
+
+Our simple [Flask](https://flask.palletsprojects.com/en/stable/) application is built to serve files from the `/app/messages` directory as responses. Our container has this directory mounted to our repository's `ngs_intro/containers/messages` directory. If we add files ending in `.txt` to this folder, then our responses will change when we refresh these pages. Run `./messages.sh` to generate some examples. Our endpoints will now return the following:
+
+- `http://localhost:8080/messages` -> `dog cow cat`
+- `http://localhost:8080/messages/dog` -> `Woof!`
+- `http://localhost:8080/messages/cow` -> `Moo!`
+- `http://localhost:8080/messages/cat` -> `Meow!`
+
+You can give it a try yourself by adding your own text files.
+
+You can stop the container by running `docker stop <CONTAINER ID>`, where you can get the `CONTAINER ID` from the original response from running `docker run` or from running `docker ps`.
+
+:::warning
+It's recommended to stop this docker container before moving on to any other examples.
+:::
+
+### Using our Docker Image to run a Script
+
+```bash
+# build the container image
+# (only if you did not build the image in the previous example)
+docker build -t hello-py .
+# run the script
+docker run -v ./messages:/app/messages hello-py:latest python cli.py message cat
+```
+
+Like the service example above, our cli has the following commands:
+
+- `hello` -> prints a `Hello, World!` message
+- `messages` -> prints our available messages
+- `message <msg>` -> prints the message for cat/dog/etc if available.
+
+### Overview
+
+Our main take aways are the following:
+
+- Containers may be used to launch a service, but for bioinformatics, we will mainly use them to reproducibly run cli commands in pipelines.
+- If we want files available in our container, we must mount them when starting/running the container.
+- Same as mounting, we must forward ports to our local machine if we wish to do any networking.
+- Container images can live in registries and be pulled to my computer to run.
+- I can build container images on my computer using a Dockerfile (sometimes called a Containerfile).
+- A "container image" is the definition of a container to be run, but and a "container instance" is a specific instance of a running container.
+
+:::note
+And most importantly, containers allow us to create re-usable environments to have better and more reproducible science.
+:::
+
+## Podman
+
+Working with podman should feel like working with docker. It is a docker-compatible, but runs daemonless and natively runs in a rootless manner. It is designed to be more secure than running docker containers.
+
+:::note
+Currently, running podman in this flox environment produces the following warning:
+
+`WARN[0000] Using cgroups-v1 which is deprecated in favor of cgroups-v2 with Podman v5 and will be removed in a future version. Set environment variable 'PODMAN_IGNORE_CGROUPSV1_WARNING' to hide this warning.`
+:::
+
+### Running a Podman Image
+
+For a simple example of running a docker container image, run this command:
+
+```bash
+podman run --rm docker://grycap/cowsay
+```
+
+### Building and Running a Podman Image as a Service and Script
+
+This is the exact same as the docker example above, just replace the term `docker` with `podman`.
+
+## Apptainer
+
+Apptainer is a container platform designed to be executed on HPC environments. Apptainer is like podman in that it is designed to be run with limited privileges. It is also benefits from extra portability as apptainer containers are created as individual `.sif` files.
+
+:::note
+Apptainer currently throws the following error when running containers:
+
+`ERROR: ld.so: object '/nix/store/kas9zlj7iyac7bli0agr8yqjvrqg2iqg-ld-floxlib-1.0.0/lib/ld-floxlib.so' cannot be loaded as audit interface: cannot open shared object file; ignored.`
+
+I believe this is from [ld-floxlib](https://github.com/flox/ld-floxlib) being archived/deprecated and should not cause issue.
+:::
+
+### Running an Apptainer Image
+
+```bash
+apptainer run docker://grycap/cowsay
+```
+
+### Building and Running an Apptainer Image
+
+In this example, `lolcow.def` is the equivalent to a `Dockerfile`; however, for apptainer, the build specification may be explicitly given as input to the `build` command.
+
+```bash
+# build the container
+apptainer build lolcow.sif lolcow.def
+# run the container
+apptainer run lolcow.sif
+```
+
+### Building and Running an Apptainer Image from a Docker Image
+
+You can also build an apptainer image from a remote or local docker image.
+
+Remote (aka, from [Docker Hub](https://hub.docker.com/)):
+
+```bash
+# build the container
+apptainer build lolcow_remote_docker.sif docker://grycap/cowsay
+# run the container
+apptainer run lolcow_remote_docker.sif
+```
+
+Local (aka, from the images managed by the local docker daemon):
+
+:::note
+We are using our `Dockerfile` to run the same application in apptainer as we ran with docker and podman.
+:::
+
+```bash
+# build the docker container
+# (you can skip this step if you already built this container in the docker example)
+docker build -t hello-py .
+# build the apptainer container
+apptainer build hello.sif docker-daemon://hello-py:latest
+# run the container
+apptainer exec --cwd /app -B ./messages:/app/messages hello.sif python cli.py messages
+```
+
+:::tip
+The `-B` argument is the equivalent to docker's `-v` argument to mount volumes.
+:::
+
+:::tip
+The `--cwd` argument is required when using the `exec` command as apptainer will default the current working directory to the directory from where apptainer is invoked.
+:::
+
+### Building and Running an Apptainer Image as a Service
+
+:::warning
+Running the below task will NOT work with the nix environment we have created, but is included for completeness. This is because the nix install does NOT permit the user the behavior to launch network tasks or to operate as a fakeroot. If you happen to work in an environment where this is enabled, this could be useful to you.
+:::
+
+```bash
+# build the docker container
+# (you can skip this step if you already built this container in the docker example)
+docker build -t hello-py .
+# build the apptainer container
+apptainer build hello.sif docker-daemon://hello-py:latest
+# run the container
+apptainer instance start -f -B ./messages:/app/messages -n --network-args "portmap=8080:80/tcp" hello.sif hello-py1
+# get information on your running containers
+apptainer instance list
+```
+
+You can stop this container with the `apptainer instance stop hello-py1` command.
