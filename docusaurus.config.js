@@ -8,6 +8,19 @@ import { themes as prismThemes } from 'prism-react-renderer'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const productionURL = 'https://tshanebuckley.github.io';
+function getURL() {
+  if (process.env.NODE_ENV === "production") {
+    return productionURL;
+  }
+  return 'http://localhost:3000';
+}
+const URL = getURL();
+const linkedinURL = 'https://www.linkedin.com/in/shane-buckley-1a89b318b/';
+const githubURL = 'https://github.com/tshanebuckley';
+const resumeURL = URL + '/resume';
+const coffeeURL = 'https://buymeacoffee.com/tshanebuckx';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Shane Buckley',
@@ -15,7 +28,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://tshanebuckley.github.io',
+  url: URL,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '',
@@ -52,7 +65,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/tshanebuckley/tshanebuckley.github.io/tree/main'
+            githubURL + '/tshanebuckley.github.io/tree/main'
         },
         blog: false,
         theme: {
@@ -81,11 +94,29 @@ const config = {
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
-            'href': 'https://github.com/tshanebuckley',
+            'href': githubURL,
             'position': 'right',
             'className': 'header-github-link',
-            'aria-label': 'GitHub repository'
-          }
+            'aria-label': 'GitHub'
+          },
+          {
+            'href': linkedinURL,
+            'position': 'right',
+            'className': 'header-linkedin-link',
+            'aria-label': 'LinkedIn'
+          },
+          {
+            'href': resumeURL,
+            'position': 'right',
+            'className': 'header-resume-link',
+            'aria-label': 'Resume'
+          },
+          {
+            'href': coffeeURL,
+            'position': 'right',
+            'className': 'header-coffee-link',
+            'aria-label': 'Buy me a coffee'
+          },
         ]
       },
       footer: {
@@ -130,12 +161,20 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/tshanebuckley'
+                href: githubURL,
               },
               {
                 label: 'LinkedIn',
-                href: 'https://www.linkedin.com/in/shane-buckley-1a89b318b/'
-              }
+                href: linkedinURL,
+              },
+              {
+                label: 'Resume',
+                href: resumeURL,
+              },
+              {
+                label: 'Buy me a coffee',
+                href: coffeeURL,
+              },
             ]
           }
         ]
