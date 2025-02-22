@@ -6,7 +6,6 @@ import { useState, useRef } from 'react';
 
 const SkillCarousel = (props) => {
   let cards = props.cards;
-  console.log(cards);
   const [activeIndex, setActiveIndex] = useState(0);
   const [flippedCards, setFlippedCards] = useState(new Set());
   const [isFocused, setIsFocused] = useState(false);

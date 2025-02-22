@@ -1,11 +1,7 @@
 import Layout from '@theme/Layout'
-//import Heading from '@theme/Heading'
-//import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import HomeBody from '../Homebody';
-//import Banner from './Banner';
 
 function HomepageHeader() {
-  //const { siteConfig } = useDocusaurusContext()
 
   return (
     <header
@@ -16,25 +12,19 @@ function HomepageHeader() {
         backgroundSize: 'cover'
       }}
     >
-      <div className='container'>
-        {/* <Banner className={'mb-4 text-2xl font-bold md:text-3xl lg:text-5xl'}/> */}
-        {/* <Heading as='h1' className='mb-4 text-2xl font-bold md:text-3xl lg:text-5xl'>
-        </Heading> */}
-      </div>
     </header>
   )
 }
 
-export default function Home({ homePageBlogMetadata, recentPosts }) {
-
+export default function Home() { //{ homePageBlogMetadata, recentPosts }
   var home = (
     <Layout>
       <HomepageHeader />
       <main>
-        <HomeBody recentPosts={recentPosts} homePageBlogMetadata={homePageBlogMetadata} />
+        {/* <HomeBody recentPosts={recentPosts} homePageBlogMetadata={homePageBlogMetadata} /> */}
+        <HomeBody />
       </main>
     </Layout>
   )
-  //return <PokeApp child={home}></PokeApp>;
   return home
 }

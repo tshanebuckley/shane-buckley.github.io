@@ -3,13 +3,12 @@ import Link from '@docusaurus/Link'
 import Image from '@theme/IdealImage'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import TagsListInline from '@theme/TagsListInline'
-
 import { Avatar } from '../ui/avatar'
 import { Card, CardContent, CardFooter } from '../ui/card'
 import { Button } from '../ui/button'
-
 import VerticalTimeline from '../Timeline'
-// import SkillsCarousel from '../SkillsList'
+import { Overview } from '../../lib/constants'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 function RecentBlogPostCard({ recentPost }) {
   const { blogData } = recentPost
@@ -79,10 +78,9 @@ function HomeBodyHeader({ text }) {
   )
 }
 
-export default function HomeBody({ homePageBlogMetadata, recentPosts }) {
-  const overview = `
-  I'm a technology professional that loves to explore new and different programming technologies, languages, and strategies in my free time. I have a passion for working on scientific applications in the fields of bioinformatics and chemistry.
-  `
+export default function HomeBody() { //{ homePageBlogMetadata, recentPosts }
+  const overview = Overview();
+  const { context } = useDocusaurusContext();
 
   return (
     <div className='container my-8 max-w-7xl'>
@@ -103,7 +101,7 @@ export default function HomeBody({ homePageBlogMetadata, recentPosts }) {
       <HomeBodyHeader text="Resume"/>
       <VerticalTimeline />
       <br></br>
-      <HomeBodyHeader text={homePageBlogMetadata.blogTitle}/>
+      {/* <HomeBodyHeader text={homePageBlogMetadata.blogTitle}/>
       <div className='grid grid-cols-1 gap-8 sm:grid-cols-2'>
         {recentPosts.map((recentPost, index) => (
           <div key={index}>
@@ -116,7 +114,7 @@ export default function HomeBody({ homePageBlogMetadata, recentPosts }) {
         <Link to={homePageBlogMetadata.path}>
           <Button>See all</Button>
         </Link>
-      </div>
+      </div> */}
     </div>
   )
 }
